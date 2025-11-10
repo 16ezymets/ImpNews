@@ -1,3 +1,7 @@
 # Default ignored files
+.env
+*.db
+__pycache__/
+*.log
 /shelf/
 /workspace.xml
