@@ -19,8 +19,8 @@
 ## ✨ Возможности
 
 ### 📰 **Получение новостей**
-- Свежие новости в реальном времени
-- Агрегация из нескольких источников
+- Свежие популярные новости в реальном времени
+- Возможность добавлять каналы для мониторинга
 
 ### 🔔 **Уведомления**
 - Push-уведомления о важных новостях
@@ -28,14 +28,13 @@
 
 ---
 
-
 ## 🚀 Установка
 
 ### Предварительные требования
-- Python 3.10 или выше
-- Свой API_ID и API_HASH
-- Telegram Bot Token от [@BotFather](https://t.me/BotFather)
-- Доступ к интернету
+- #### Python 3.10 или выше
+- #### Свой API_ID и API_HASH
+- #### Telegram Bot Token от [@BotFather](https://t.me/BotFather)
+- #### Доступ к интернету
 
 ### Шаг 1: Клонирование репозитория
 ```bash
@@ -44,7 +43,9 @@ cd ImpNews
 ```
 ### Шаг 2: Настройка окружения
 ```bash
-cp .env.example .env
+cp .env.example .env # Linux/Mac
+# copy .env.eample .env - Windows
+
 # ЗАПОЛНИТЕ СВОИ ДАННЫЕ В .env!
 ```
 ### Шаг 3: Установка зависимостей
@@ -124,11 +125,6 @@ bash
 
 ---
 
-## 📄 Лицензия
-Этот проект распространяется под лицензией MIT. См. файл LICENSE для подробностей.
-
----
-
 ## 👨‍💻 Автор
 - #### GitHub: @16ezymets
 - #### Telegram: @qprizz
@@ -148,22 +144,16 @@ bash
 
 </div>
 
-### 📈 Детальная статистика
-| Метрика | Значение | Тенденция |
-|---------|----------|-----------|
-| **⭐ Звезды** | ![Stars](https://img.shields.io/github/stars/16ezymets/ImpNews?label=&style=flat-square) | ![Star Growth](https://img.shields.io/github/stars/16ezymets/ImpNews?style=social) |
-| **🍴 Форки** | ![Forks](https://img.shields.io/github/forks/16ezymets/ImpNews?label=&style=flat-square) | ![Fork Growth](https://img.shields.io/github/forks/16ezymets/ImpNews?style=social) |
-| **🐛 Issues** | ![Issues](https://img.shields.io/github/issues/16ezymets/ImpNews?label=&style=flat-square) | ![Issues Closed](https://img.shields.io/github/issues-closed/16ezymets/ImpNews?label=closed&style=flat-square) |
-| **🔄 PR** | ![PRs](https://img.shields.io/github/issues-pr/16ezymets/ImpNews?label=&style=flat-square) | ![PRs Closed](https://img.shields.io/github/issues-pr-closed/16ezymets/ImpNews?label=merged&style=flat-square) |
-| **📏 Размер** | ![Repo Size](https://img.shields.io/github/repo-size/16ezymets/ImpNews?label=&style=flat-square) | ![Languages](https://img.shields.io/github/languages/code-size/16ezymets/ImpNews?style=flat-square) |
-| **📅 Последний коммит** | ![Last Commit](https://img.shields.io/github/last-commit/16ezymets/ImpNews?label=&style=flat-square) | ![Commit Activity](https://img.shields.io/github/commit-activity/m/16ezymets/ImpNews?label=активность&style=flat-square) |
-
-### 🌟 История звезд
-[![Star History Chart](https://api.star-history.com/svg?repos=16ezymets/ImpNews&type=Timeline)](https://star-history.com/#16ezymets/ImpNews&Timeline)
-
 ### 📊 Используемые языки
 ```text
 Python:   ██████████████████████████ 95.2%
 Makefile: ████ 4.5%
 Other:    ░ 0.3%
+```
+---
+<div align='center'>
+  
+## ⭐ Если вам нравится проект, поставьте [звезду](https://api.star-history.com/svg?repos=16ezymets/ImpNews&type=Date) на GitHub!
+
+</div>
 
