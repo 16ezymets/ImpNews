@@ -132,25 +132,6 @@ bash
 
 ---
 
-## 📊 Статистика проекта
-
-<div align="center">
-
-![GitHub Stars](https://img.shields.io/github/stars/16ezymets/ImpNews?style=for-the-badge&logo=github&color=yellow)
-![GitHub Forks](https://img.shields.io/github/forks/16ezymets/ImpNews?style=for-the-badge&logo=github&color=blue)
-![GitHub Issues](https://img.shields.io/github/issues/16ezymets/ImpNews?style=for-the-badge&logo=github&color=red)
-![GitHub Pull Requests](https://img.shields.io/github/issues-pr/16ezymets/ImpNews?style=for-the-badge&logo=github&color=green)
-![GitHub License](https://img.shields.io/github/license/16ezymets/ImpNews?style=for-the-badge&logo=opensourceinitiative&color=orange)
-
-</div>
-
-### 📊 Используемые языки
-```text
-Python:   ██████████████████████████ 95.2%
-Makefile: ████ 4.5%
-Other:    ░ 0.3%
-```
----
 <div align='center'>
   
 ## ⭐ Если вам нравится проект, поставьте [звезду](https://api.star-history.com/svg?repos=16ezymets/ImpNews&type=Date) на GitHub!
