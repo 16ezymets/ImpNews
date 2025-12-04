@@ -123,7 +123,7 @@ bash
 #### 2. Создайте ветку (```git checkout -b feature/AmazingFeature```)
 #### 3. Закоммитьте изменения (```git commit -m 'Add AmazingFeature'```)
 #### 4. Запушьте ветку (```git push origin feature/AmazingFeature```)
-#### 5. Откройте Pull Request
+#### 5. Откройте [Pull Request](https://github.com/16ezymets/ImpNews/pulls)
 
 ---
 
