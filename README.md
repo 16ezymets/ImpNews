@@ -1,6 +1,6 @@
 <div align="center">
 
-# 📰 ImpNews Telegram Bot
+# 📰 Important News Telegram Bot
 
 ![Python](https://img.shields.io/badge/Python-3.12%2B-blue?logo=python&logoColor=white)
 ![python-telegram-bot](https://img.shields.io/badge/python--telegram--bot-≥20.7-blue?logo=telegram&logoColor=white)
