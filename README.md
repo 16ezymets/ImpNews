@@ -111,12 +111,12 @@ bash
 ---
 
 ## Отчет об ошибках
-#### 1. Проверьте существующие [issues](https://github.com/16ezymets/ImpNews/issues)
+#### 1. Проверьте существующие [Issues](https://github.com/16ezymets/ImpNews/issues)
 #### 2. Создайте новый issue с подробным описанием
 
 ## Предложение улучшений
 #### 1. Обсудите идею в issues
-#### 2. Создайте Pull Request
+#### 2. Создайте [Pull Request](https://github.com/16ezymets/ImpNews/pulls)
 
 ## Процесс Pull Request
 #### 1. Форкните репозиторий
