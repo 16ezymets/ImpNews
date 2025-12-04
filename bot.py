@@ -3,7 +3,7 @@ from datetime import datetime
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
 from telethon import TelegramClient
-from telethon.tl.types import Message, MessageReactions
+from telethon.tl.types import Message, MessageReactions, Channel as tgChannel, User as tgUser, Chat
 
 from sql_database import *
 from db_utils import *
@@ -24,6 +24,7 @@ class TelegramMonitorBot:
     def __init__(self):
         self.application = None
         self.is_monitoring = False
+        self.monitoring_start_times = {}
 
     @db_session(commit=True)  # Auto-commit enabled
     async def start(self, update: Update, context: ContextTypes.DEFAULT_TYPE, db):
@@ -66,15 +67,37 @@ class TelegramMonitorBot:
         try:
             async with telethon_client:
                 entity = await telethon_client.get_entity(channel_username)
+
+                if isinstance(entity, tgUser):
+                    await update.message.reply_text(
+                        f"❌ @{channel_username} is a user, not a channel!\n"
+                        "Add only public channels."
+                    )
+                    return
+
+                elif isinstance(entity, Chat):
+                    await update.message.reply_text(
+                        f"❌ @{channel_username} is a group, not a channel!\n"
+                        "Add only public channels."
+                        "Or try to use /add_private_channel"
+                    )
+                    return
+
+                elif hasattr(entity, 'restricted') and entity.restricted:
+                    await update.message.reply_text(
+                        f"⚠️ Chanel @{channel_username} is a private channel.\n"
+                        "Make sure the bot is added as member."
+                        "Or try to use /add_private_channel"
+                    )
+                    return
+
                 channel_title = getattr(entity, 'title', channel_username)
 
-            # Находим или создаем пользователя
             user = db.query(User).filter(User.telegram_id == user_id).first()
             if not user:
                 user = User(telegram_id=user_id, username=update.effective_user.username)
                 db.add(user)
 
-            # Находим или создаем канал
             channel = db.query(Channel).filter(
                 Channel.channel_username == channel_username
             ).first()
@@ -98,6 +121,73 @@ class TelegramMonitorBot:
             raise
 
     @db_session(commit=True)
+    async def add_private_channel(self, update: Update, context: ContextTypes.DEFAULT_TYPE, db):
+        """Handler for /add_private_channel command."""
+        if not context.args:
+            await update.message.reply_text(
+                "Usage:\n"
+                "(ID) /add_private -1001234567890\n"
+                "or\n"
+                "(Join link) /add_private t.me/joinchat/ABC123def456"
+            )
+            return
+
+        identifier = context.args[0]
+        user_id = update.effective_user.id
+
+        try:
+            async with telethon_client:
+                entity = await telethon_client.get_entity(identifier)
+
+                if not isinstance(entity, Channel):
+                    await update.message.reply_text("❌ That is not a channel!")
+                    return
+
+                channel_title = entity.title
+                channel_id = entity.id
+
+                if entity.username:
+                    channel_username = entity.username
+                else:
+                    channel_username = f"private_{abs(channel_id)}"
+
+                try:
+                    test_msg = await telethon_client.get_messages(entity, limit=1)
+                    if not test_msg:
+                        await update.message.reply_text("⚠️  I can't read messages. Please check your permissions.")
+                except Exception as e:
+                    await update.message.reply_text("❌ No read laws in this channel!")
+                    logger.error(f'Error reading private channel messages: {e}')
+                    return
+
+                channel = db.query(Channel).filter(
+                    Channel.channel_username == channel_username
+                ).first()
+
+                if not channel:
+                    channel = Channel(
+                        channel_username=channel_username,
+                        channel_title=channel_title,
+                        is_active=True
+                    )
+                    db.add(channel)
+
+                user = db.query(User).filter(User.telegram_id == user_id).first()
+                if not user:
+                    user = User(telegram_id=user_id, username=update.effective_user.username)
+                    db.add(user)
+
+                if channel not in user.channels:
+                    user.channels.append(channel)
+                    await update.message.reply_text(f"✅ @{channel_username} added!\nTitle: {channel_title}")
+                else:
+                    await update.message.reply_text(f"❌ @{channel_username} already added!")
+
+        except Exception as e:
+            logger.error(f"Private channel error: {e}")
+            await update.message.reply_text(f"❌ Error: {str(e)[:100]}")
+
+    @db_session(commit=True)
     async def remove_channel(self, update: Update, context: ContextTypes.DEFAULT_TYPE, db):
         """Handler for /remove_channel command."""
         if not context.args:
@@ -107,13 +197,11 @@ class TelegramMonitorBot:
         channel_username = context.args[0].replace('@', '')
         user_id = update.effective_user.id
 
-        # Находим пользователя
         user = db.query(User).filter(User.telegram_id == user_id).first()
         if not user:
             await update.message.reply_text("❌ User not found. Use /start first.")
             return
 
-        # Находим канал
         channel = db.query(Channel).filter(
             Channel.channel_username == channel_username
         ).first()
@@ -155,7 +243,7 @@ class TelegramMonitorBot:
     async def set_min_reactions(self, update: Update, context: ContextTypes.DEFAULT_TYPE, db):
         """Handler for /set_min_reactions command."""
         if not context.args or not context.args[0].isdigit():
-            # Show current value
+
             user_id = update.effective_user.id
             user = db.query(User).filter(User.telegram_id == user_id).first()
             current = user.min_reactions if user else DEFAULT_MIN_REACTIONS
@@ -184,13 +272,17 @@ class TelegramMonitorBot:
 
     async def start_monitoring(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Handler for /start_monitoring command."""
+        user_id = update.effective_user.id
+
         if self.is_monitoring:
             await update.message.reply_text("🔍 Monitoring already running!")
             return
 
+        self.monitoring_start_times[user_id] = int(datetime.now().timestamp())
+
         self.is_monitoring = True
-        await update.message.reply_text("🚀 Monitoring started!")
         asyncio.create_task(self.monitor_channels())
+        await update.message.reply_text("🚀 Monitoring started!")
 
     async def stop_monitoring(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Handler for /stop_monitoring command."""
@@ -226,10 +318,14 @@ class TelegramMonitorBot:
     async def check_channel_posts(self, db, user, channel):
         """Check posts in specific channel."""
         try:
+            start_time = self.monitoring_start_times.get(user.telegram_id)
+            if not start_time:
+                return
+
             async with telethon_client:
                 messages = await telethon_client.get_messages(
                     channel.channel_username,
-                    limit=20
+                    limit=10
                 )
 
                 for message in messages:
@@ -265,6 +361,10 @@ class TelegramMonitorBot:
                         db.add(sent_post)
                         db.commit()
 
+                    if hasattr(message, 'date') and message.date:
+                        if message.date.timestamp() < start_time:
+                            continue
+
         except Exception as e:
             logger.error(f"Error checking {channel.channel_username}: {e}")
 
@@ -284,7 +384,7 @@ class TelegramMonitorBot:
                                 message: Message, reactions_count: int):
         """Send popular post to user."""
         try:
-            post_text = message.text or message.message or ""
+            post_text = message.message or ""
             if len(post_text) > 4000:  # Telegram limit
                 post_text = post_text[:3998] + "..."
 
@@ -316,6 +416,7 @@ class TelegramMonitorBot:
         handlers = [
             ("start", self.start),
             ("add_channel", self.add_channel),
+            ("add_private_channel", self.add_private_channel),
             ("remove_channel", self.remove_channel),
             ("my_channels", self.my_channels),
             ("set_min_reactions", self.set_min_reactions),
@@ -326,7 +427,7 @@ class TelegramMonitorBot:
         for command, handler in handlers:
             self.application.add_handler(CommandHandler(command, handler))
 
-        print("🤖 Bot starting...")
+        print("🤖 Bot starting")
         self.application.run_polling()
 
 
