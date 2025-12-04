@@ -5,7 +5,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def db_session(commit=True, rollback_on_error=True, close=True):
+def db_session(*, commit=True, rollback_on_error=True, close=True):
     """
     A universal decorator for working with databases.
 
