@@ -2,9 +2,12 @@
 
 # 📰 ImpNews Telegram Bot
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)
-![aiogram](https://img.shields.io/badge/aiogram-3.x-green?logo=telegram)
-![License](https://img.shields.io/badge/license-MIT-yellow)
+![Python](https://img.shields.io/badge/Python-3.12%2B-blue?logo=python&logoColor=white)
+![python-telegram-bot](https://img.shields.io/badge/python--telegram--bot-≥20.7-blue?logo=telegram&logoColor=white)
+![Telethon](https://img.shields.io/badge/telethon-≥1.28.5-0088cc?logo=telegram)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-≥2.0.23-red?logo=sqlalchemy)
+![dotenv](https://img.shields.io/badge/python--dotenv-1.0.0+-green)
+
 ![Status](https://img.shields.io/badge/status-active-brightgreen)
 ![Version](https://img.shields.io/badge/version-1.0.0-orange)
 
@@ -32,7 +35,7 @@
 ## 🚀 Установка
 
 ### Предварительные требования
-- #### Python 3.10 или выше
+- #### Python 3.12 или выше
 - #### Свой API_ID и API_HASH
 - #### Telegram Bot Token от [@BotFather](https://t.me/BotFather)
 - #### Доступ к интернету
@@ -51,7 +54,7 @@ cp .env.example .env # Linux/Mac
 ```
 ### Шаг 3: Установка зависимостей
 ```bash
-python -m venv venv
+python3 -m venv venv
 source .venv/bin/activate # Linux/Mac
 # venv/Scripts/activate - Windows
 pip install -r requirements.txt
@@ -76,16 +79,14 @@ DATABASE_URL=sqlite:///news_bot.db
 ```
 
 ## 📖 Использование
-### Основные команды
-```text
-/start - запустить бота
-/add_channel @username - добавить
-/my_channels - показать мои каналы
-/remove_channel @username - удалить канал
-/set_min_reactions 100 - установить количество реакций
-/start_monitoring - начать мониторинг
-/stop_monitoring - остановить мониторинг
-```
+### Команды
+- #### `/start` - запустить бота
+- #### `/add_channel @username` - добавить канал
+- #### `/my_channels` - показать мои каналы
+- #### `/remove_channel @username` - удалить канал
+- #### `/set_min_reactions 100` - установить количество реакций
+- #### `/start_monitoring`- начать мониторинг
+- #### `/stop_monitoring` - остановить мониторинг
 
 ## 🏗️ Архитектура
 ```text
