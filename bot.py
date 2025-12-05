@@ -3,7 +3,7 @@ from datetime import datetime
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
 from telethon import TelegramClient
-from telethon.tl.types import Message, MessageReactions, Channel as tgChannel, User as tgUser, Chat
+from telethon.tl.types import Message, MessageReactions, User as tgUser, Chat
 
 from sql_database import *
 from db_utils import *
@@ -39,18 +39,18 @@ class TelegramMonitorBot:
 
         welcome_msg = f"""👋 Hello, {update.effective_user.first_name}!
         
-                    🤖 I'm a Telegram channel monitor bot.
+🤖 I'm a Telegram channel monitor bot.
                     
-                    📋 Available commands:
-                    /add_channel @username - add channel
-                    /my_channels - show my channels  
-                    /remove_channel @username - remove channel
-                    /set_min_reactions 100 - set reaction threshold
-                    /start_monitoring - start monitoring
-                    /stop_monitoring - stop monitoring
+📋 Available commands:
+/add_channel @username - add channel
+/my_channels - show my channels  
+/remove_channel @username - remove channel
+/set_min_reactions 1000 - set reaction threshold
+/start_monitoring - start monitoring
+/stop_monitoring - stop monitoring
                     
-                    📊 To start, add a channel:
-                    /add_channel @bbc_russian"""
+📊 To start, add a channel:
+/add_channel @bbc_russian"""
 
         await update.message.reply_text(welcome_msg)
 
