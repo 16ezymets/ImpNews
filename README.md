@@ -42,7 +42,7 @@
 
 ### Шаг 1: Клонирование репозитория
 ```bash
-git clone https://github.com/16ezymets/ImpNews.git
+git clone https://github.com/16ezymets/ImpNews
 cd ImpNews
 ```
 ### Шаг 2: Настройка окружения
