@@ -15,7 +15,7 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     telegram_id = Column(Integer, unique=True, index=True)
     username = Column(String, nullable=True)
-    min_reactions = Column(Integer, default=100)
+    min_reactions = Column(Integer, default=1000)
 
     # Только один relationship
     channels = relationship(
