@@ -57,21 +57,3 @@ class SentPost(Base):
     channel_id = Column(Integer, index=True)
     post_id = Column(Integer, index=True)
     sent_at = Column(Integer)
-
-
-
-def create_tables():
-    """
-    Creates all tables
-    :return: None
-    """
-    Base.metadata.create_all(bind=engine)
-
-
-def get_db():
-    """
-    Creates and get database
-    :return: Generator[Session, Any, None] | None
-    """
-    db = SessionLocal()
-    return db

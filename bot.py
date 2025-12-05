@@ -409,7 +409,7 @@ class TelegramMonitorBot:
 
     def run(self):
         """Start the bot."""
-        create_tables()
+        Base.metadata.create_all(bind=engine)
 
         self.application = Application.builder().token(BOT_TOKEN).build()
 

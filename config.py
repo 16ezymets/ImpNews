@@ -10,4 +10,4 @@ BOT_TOKEN = os.getenv("BOT_TOKEN", '')
 
 DATABASE_URL = os.getenv("DATABASE_URL", 'sqlite:///telegram_monitor.db')
 
-DEFAULT_MIN_REACTIONS = 100
+DEFAULT_MIN_REACTIONS = 1000
