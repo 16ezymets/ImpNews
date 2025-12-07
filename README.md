@@ -84,7 +84,7 @@ DATABASE_URL=sqlite:///news_bot.db
 - #### `/add_channel @username` - добавить канал
 - #### `/my_channels` - показать мои каналы
 - #### `/remove_channel @username` - удалить канал
-- #### `/set_min_reactions 100` - установить количество реакций
+- #### `/set_min_reactions 1000` - установить количество реакций
 - #### `/start_monitoring`- начать мониторинг
 - #### `/stop_monitoring` - остановить мониторинг
 
@@ -104,8 +104,7 @@ ImpNews/
 ---
 
 ## Проверка кода
-```
-bash
+```bash
 ```
 
 ---
