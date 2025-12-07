@@ -4,12 +4,12 @@ import asyncio
 
 
 async def login():
-    print("🔐 Авторизация Telethon...")
+    print("🔐 Telethon authorisation...")
 
     client = TelegramClient('monitor_session', API_ID, API_HASH)
     await client.start()
 
-    print("✅ Готово! Теперь запускай бота командой: python bot.py")
+    print("✅ Done! Now launch the bot: python bot.py")
     await client.disconnect()
 
 
