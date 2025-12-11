@@ -135,7 +135,7 @@ python3 test.py
 
 <div align='center'>
   
-## ⭐ Если вам нравится проект, поставьте [звезду](https://api.star-history.com/svg?repos=16ezymets/ImpNews&type=Date) на GitHub!
+## ⭐ Если вам нравится проект, поставьте звезду на GitHub!
 
 </div>
 
