@@ -2,14 +2,6 @@
 
 # 📰 Important News Telegram Bot
 
-![Python](https://img.shields.io/badge/Python-3.12%2B-blue?logo=python&logoColor=white)
-![python-telegram-bot](https://img.shields.io/badge/python--telegram--bot-≥20.7-blue?logo=telegram&logoColor=white)
-![Telethon](https://img.shields.io/badge/telethon-≥1.28.5-0088cc?logo=telegram)
-![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-≥2.0.23-red?logo=sqlalchemy)
-![dotenv](https://img.shields.io/badge/python--dotenv-1.0.0+-green)
-
-![Status](https://img.shields.io/badge/status-active-brightgreen)
-![Version](https://img.shields.io/badge/version-1.0.0-orange)
 
 **Умный Telegram-бот для получения популярных новостей**  
 *Актуальные новости • Персонализация • Уведомления*
@@ -59,6 +51,12 @@ source .venv/bin/activate # Linux/Mac
 # venv/Scripts/activate - Windows
 pip install -r requirements.txt
 ```
+
+### Проверка кода (необязательно)
+```bash
+pytest
+```
+
 ### Шаг 4: Авторизация бота как пользователя
 ```bash
 python3 login.py
@@ -96,15 +94,10 @@ ImpNews/
 ├── db_utils.py            # Декоратор для работы с базой данных
 ├── sql_database.py        # База данных SQL
 ├── config.py              # Конфигурации бота
-├── test.py                # Тест
+├── test_ище.py            # Тест
 ├── requirements.txt       # Необходимые библиотеки для запуска
 ├── .env                   # Окружение
 └── README.md              # Документация
-```
-
-## Проверка кода
-```bash
-python3 test.py
 ```
 
 ---
