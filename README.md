@@ -104,7 +104,7 @@ ImpNews/
 
 ## Проверка кода
 ```bash
-python3 test.py
+python3 test_bot.py
 ```
 
 ---
