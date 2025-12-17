@@ -92,7 +92,7 @@ ImpNews/
 ├── db_utils.py            # Декоратор для работы с базой данных
 ├── sql_database.py        # База данных SQL
 ├── config.py              # Конфигурации бота
-├── test.py                # Тест
+├── test_bot.py            # Тесты
 ├── requirements.txt       # Необходимые библиотеки для запуска
 ├── .env                   # Окружение
 └── README.md              # Документация
