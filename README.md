@@ -29,7 +29,6 @@
 - #### Python 3.12 или выше
 - #### Свой API_ID и API_HASH
 - #### Telegram Bot Token от [@BotFather](https://t.me/BotFather)
-- #### Доступ к интернету
 
 ### Шаг 1: Клонирование репозитория
 ```bash
